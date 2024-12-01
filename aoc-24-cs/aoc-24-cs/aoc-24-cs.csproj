@@ -9,13 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="01\input_01.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="01\input_01.txt">
+    <None Update="01\input_01.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
-
 </Project>

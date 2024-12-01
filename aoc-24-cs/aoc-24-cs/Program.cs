@@ -1,5 +1,4 @@
-﻿
-namespace aoc_24_cs
+﻿namespace aoc_24_cs
 {
     public partial class Program
     {

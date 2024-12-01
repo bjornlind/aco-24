@@ -21,12 +21,12 @@
 
             var totalDist = leftList.Zip(rightList, (ai, bi) => Math.Abs(ai - bi)).Sum();
 
-            Console.WriteLine(totalDist);
+            Console.WriteLine("Day 01-01: " + totalDist);
 
             int similarityScore = 0;
             leftList.ForEach(x => similarityScore += x * rightList.Count(y => x == y));
 
-            Console.WriteLine(similarityScore);
+            Console.WriteLine("Day 01-02: " + similarityScore);
         }
     }
 }
