@@ -6,7 +6,7 @@
 
         private static List<Action> actions = new List<Action>()
         {
-            Problem01, Problem02, Problem03, Problem04
+            Problem01, Problem02, Problem03, Problem04, Problem05
         };
 
         public static void Main(string[] args)
