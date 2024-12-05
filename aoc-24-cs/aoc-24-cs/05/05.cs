@@ -10,9 +10,9 @@ namespace aoc_24_cs
             Dictionary<int, List<int>> rules = new Dictionary<int, List<int>>();
             bool parsingRules = true;
             int sum1 = 0;
+            int sum2 = 0;
 
             foreach (var line in File.ReadLines("05\\input_05.txt"))
-                //foreach (var line in File.ReadLines("05\\example_05.txt"))
             {
                 if (parsingRules)
                 {
@@ -42,6 +42,7 @@ namespace aoc_24_cs
 
                         if (!rules.ContainsKey(key))
                         {
+                            // ok if last element 
                             ok = i == nums.Count - 1;
                             break;
                         }
@@ -61,28 +62,60 @@ namespace aoc_24_cs
                         }
                     }
 
-                    if (ok)
+                    sum1 += ok ? nums[nums.Count / 2] : 0;
+
+                    // Part 2
+
+                    if (!ok)
                     {
                         nums.ForEach(n =>
                         {
-                            if(rules.ContainsKey(n))
+                            if (rules.ContainsKey(n))
                                 Console.WriteLine(n + " | " + string.Join(",", rules[n]));
                         });
                         Console.WriteLine(string.Join(",", nums));
-                        Console.WriteLine();
-                    }
 
-                    sum1 += ok ? nums[nums.Count / 2] : 0;
+                        nums.Sort((scndNum, firstNum) =>
+                        {
+                            if (!rules.ContainsKey(firstNum))
+                            {
+                                return -1;
+                            }
+
+                            if (!rules.ContainsKey(scndNum))
+                            {
+                                return 1;
+                            }
+
+                            var xRules = rules[scndNum];
+                            var yRules = rules[firstNum];
+
+                            if (xRules.Contains(firstNum))
+                            {
+                                return -1;
+                            }
+
+                            if (yRules.Contains(scndNum))
+                            {
+                                return 1;
+                            }
+
+                            return 0;
+                        });
+
+                        Console.WriteLine(string.Join(",", nums));
+                        Console.WriteLine();
+
+                        sum2 += nums[nums.Count / 2];
+                    }
                 }
             }
 
             var timeTaken1 = sw.Elapsed;
 
-            Console.WriteLine("Day 01-01: " + sum1);
+            Console.WriteLine("Day 05-01: " + sum1);
+            Console.WriteLine("Day 05-02: " + sum2);
             Console.WriteLine("Execution time (ms): " + timeTaken1.TotalMilliseconds);
-
-
-            //Console.WriteLine("Day 01-02: " + similarityScore);
         }
     }
 }
